@@ -39,14 +39,30 @@ const ContactForm: React.FC<Props> = ({ selectedContact, onSave }) => {
 
   return (
     <div>
-      <input name="fullName" value={form.fullName} onChange={handleChange} />
-      <input name="email" value={form.email} onChange={handleChange} />
       <input
+        placeholder="Full Name"
+        name="fullName"
+        value={form.fullName}
+        onChange={handleChange}
+      />{" "}
+      <input
+        placeholder="Email"
+        name="email"
+        value={form.email}
+        onChange={handleChange}
+      />{" "}
+      <input
+        placeholder="Phone Number"
         name="phoneNumber"
         value={form.phoneNumber}
         onChange={handleChange}
-      />
-      <input name="address" value={form.address} onChange={handleChange} />
+      />{" "}
+      <input
+        placeholder="Address"
+        name="address"
+        value={form.address}
+        onChange={handleChange}
+      />{" "}
       <button onClick={handleSubmit}>
         {form.id === 0 ? "Add Contact" : "Update Contact"}
       </button>

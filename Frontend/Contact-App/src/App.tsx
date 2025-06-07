@@ -13,7 +13,7 @@ function App() {
         selectedContact={selected}
         onSave={() => setRefresh(!refresh)}
       />
-      <ContactList onEdit={setSelected} />
+      <ContactList onEdit={setSelected} refresh={refresh} />
     </div>
   );
 }
