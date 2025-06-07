@@ -54,6 +54,7 @@ const ContactForm: React.FC<Props> = ({ selectedContact, onSave }) => {
       <input
         placeholder="Phone Number"
         name="phoneNumber"
+        type="number"
         value={form.phoneNumber}
         onChange={handleChange}
       />{" "}

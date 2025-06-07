@@ -32,8 +32,10 @@ const ContactList: React.FC<Props> = ({ onEdit, refresh }) => {
       setFilteredContacts(contacts);
     } else {
       // filter the contacts based on search term (case insensitive)
-      const filtered = contacts.filter((contact) =>
-        contact.fullName.toLowerCase().includes(value.toLowerCase())
+      const filtered = contacts.filter(
+        (contact) =>
+          contact.fullName.toLowerCase().includes(value.toLowerCase()) ||
+          contact.email.toLowerCase().includes(value.toLowerCase())
       );
       setFilteredContacts(filtered);
     }
@@ -68,7 +70,7 @@ const ContactList: React.FC<Props> = ({ onEdit, refresh }) => {
             }}
           >
             <p style={{ fontSize: "1rem", margin: 0 }}>
-              {c.fullName} | {c.email}
+              {c.fullName} | {c.email} | {c.phoneNumber} | {c.address}
             </p>
             <div>
               <button onClick={() => onEdit(c)}>Edit</button>{" "}
