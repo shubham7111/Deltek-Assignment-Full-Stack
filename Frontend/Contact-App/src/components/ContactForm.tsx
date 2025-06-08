@@ -15,23 +15,53 @@ const ContactForm: React.FC<Props> = ({ selectedContact, onSave }) => {
     phoneNumber: "",
     address: "",
   });
-
+  const [errormessage, setErrorMessage] = useState("");
   useEffect(() => {
     if (selectedContact) setForm(selectedContact);
   }, [selectedContact]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    if (e.target.name == "phoneNumber") {
+      if (/^\d{0,10}$/.test(e.target.value)) {
+        setForm({ ...form, [e.target.name]: e.target.value });
+      }
+    } else {
+      setForm({ ...form, [e.target.name]: e.target.value });
+    }
   };
-  const handleSubmit = async () => {
+
+  const checkErrorMessage = () => {
+    if (form.fullName === "") {
+      return "Name is mandatory";
+    } else if (form.email === "") {
+      return "Email is mandatory";
+    } else if (form.phoneNumber === "") {
+      return "Phone Number is mandatory";
+    } else if (form.address === "") {
+      return "Address is mandatory";
+    } else {
+      return "";
+    }
+  };
+  const handleSubmit = async (e) => {
     try {
+      e.preventDefault();
+      const error = checkErrorMessage();
+      setErrorMessage(error);
+      if (error !== "") return;
       if (form.id === 0) {
         await api.post("/", form);
       } else {
         await api.put(`/${form.id}`, form);
       }
       onSave();
-      setForm({ id: 0, fullName: "", email: "", phoneNumber: "", address: "" });
+      setForm({
+        id: 0,
+        fullName: "",
+        email: "",
+        phoneNumber: "",
+        address: "",
+      });
     } catch (e) {
       console.error(e);
     }
@@ -48,13 +78,14 @@ const ContactForm: React.FC<Props> = ({ selectedContact, onSave }) => {
       <input
         placeholder="Email"
         name="email"
+        required
         value={form.email}
         onChange={handleChange}
       />{" "}
       <input
         placeholder="Phone Number"
         name="phoneNumber"
-        type="number"
+        maxLength="10"
         value={form.phoneNumber}
         onChange={handleChange}
       />{" "}
@@ -67,6 +98,7 @@ const ContactForm: React.FC<Props> = ({ selectedContact, onSave }) => {
       <button onClick={handleSubmit}>
         {form.id === 0 ? "Add Contact" : "Update Contact"}
       </button>
+      <div style={{ color: "red" }}>{errormessage}</div>
     </div>
   );
 };
