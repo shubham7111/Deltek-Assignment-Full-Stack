@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Contacts.API.Controllers
 {
-    [ApiController]
+    [ApiController]//If the model binding fails (e.g., due to validation attributes like [Required], [EmailAddress], etc.), it automatically returns: 400 Bad request
     [Route("api/[controller]")]
     public class ContactController : ControllerBase
     {

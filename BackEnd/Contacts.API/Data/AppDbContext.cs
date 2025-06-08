@@ -12,7 +12,6 @@ namespace Contacts.API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            Console.WriteLine("tet");
             modelBuilder.Entity<Contact>().HasData(
                 Enumerable.Range(1, 10).Select(i => new Contact
                 {

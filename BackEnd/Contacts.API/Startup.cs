@@ -95,10 +95,10 @@ namespace ContactsAPI
             });
             
             using (var scope = app.ApplicationServices.CreateScope())
-{
-    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    DbInitializer.Seed(dbContext);
-}
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                DbInitializer.Seed(dbContext);
+            }
         }
     }
 }

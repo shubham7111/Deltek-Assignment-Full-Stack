@@ -20,6 +20,7 @@ const ContactForm: React.FC<Props> = ({ selectedContact, onSave }) => {
     if (selectedContact) setForm(selectedContact);
   }, [selectedContact]);
 
+  //This event is coming from an <input> HTML element
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name == "phoneNumber") {
       if (/^\d{0,10}$/.test(e.target.value)) {
